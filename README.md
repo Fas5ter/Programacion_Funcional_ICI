@@ -3,5 +3,5 @@
 # Facultad de Ingeniería Mecánica y Eléctrica
 ## Ingeniería en Computación Inteligente
 ### Programación Funcional
-### Estudiante: Cristian Armando Larios Bravo
+### Estudiante: Felipe Neri Gonzalez Martinez
 ### Profesor: Dr. Walter Alexander Mata López 
