@@ -176,7 +176,7 @@ class Calculadora {
 //     calc.Calcular(a, b, args[2]);
 //   } else {
 //     print("Error de argumentos.");
-//     print("Ejemplo: dart main.dart 3 15");
+//     print("Ejemplo: dart main.dart 3 15 +");
 //   }
 // }
 
