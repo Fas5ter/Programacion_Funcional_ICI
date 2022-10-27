@@ -173,25 +173,90 @@ Tienes 19 años
 Larios Bravo Cristian
 ```
 
-### Ejercicio 1.5
+### Ejercicio 1.5. Simulacro de examen practico
 ### 1.1 Descripcion del ejercicio
-  
+  Simulacro de examen practico. Crear una clase Vehiculo, que tenga las propiedades de numero de llantas, color, modelo, marca , una funcion para mostrar las propiedades en pantalla, tres metodos y que use setters, getters y un constructor.
 #### 1.2 Código
 ```dart
+class vehiculo {
+  int? _num_llantas;
+  String? _color;
+  String? _modelo;
+  String? _marca;
 
+  void imprimircaracteristicas() {
+    print(
+        "Modelo: $_modelo\nColor: $_color\nMarca: $_marca\nNumero de llantas: $_num_llantas");
+  }
+
+  void arrancar() {
+    if (_num_llantas == 4) {
+      print('El auto se esta encendiendo....tucutucutucu.');
+    } else {
+      print('Le faltan llantas al vehiculo, no puede arrancar');
+    }
+  }
+
+  void correr() {
+    print("Rrrrrrrrr, el vehiculo va en movimiento");
+  }
+
+  void frenar() {
+    print('Issshhhh, el vehiculo se ha detenido.');
+  }
+
+  void set llantas(int llantas) => _num_llantas = llantas;
+  void set color(String color) => _color = color;
+  void set modelo(String modelo) => _modelo = modelo;
+  void set marca(String marca) => _marca = marca;   //setters
+
+  int get llantas => llantas;
+  String get color => color;  // getters
+  String get modelo => modelo;
+  String get marca => marca;
+
+  vehiculo(int llantas, String color, String marca, String modelo) {
+    this._num_llantas = llantas;
+    this._color = color; // constructor
+    this._marca = marca;
+    this._modelo = modelo;
+  }
+
+//   vehiculo(this._num_llantas, this._color, this._marca, this._modelo);
+//   vehiculo.marca(this._marca);  // Constructor resumido
+}
+
+void showVehiculo(vehiculo miCarro) {
+  print('Marca        ${miCarro.marca}');
+  print('Modelo');
+  print('Color');
+  print('No de llantas:');
+}
 ```
  #### 1.3 Implementación
  ```dart
- 
+ void main(List<String> args) {
+   vehiculo miJeep = new vehiculo(4, 'Plata', 'Jeep', 'Rubicon');
+  // vehiculo miJetta = new vehiculo(5, 'Plata', 'VW', 'Jetta');
+  print('');
+  miJeep.imprimircaracteristicas();
+  print('');
+  // showVehiculo(miJetta);
+}
  ```
 #### 1.4 Salida
 ```
 
+Modelo: Rubicon
+Color: Plata
+Marca: Jeep
+Numero de llantas: 4
+
 ```
 
-### Ejercicio 1.6
+### Ejercicio 1.6. Crear una clase padre Animal con dos clases hijo (Perro y Ave) y que la clase Perro tenga una clase hijo (Monstruo).
 ### 1.1 Descripcion del ejercicio
-  
+  Se necesita crear 4 clases de las cuales se hara uso de la herencia en Dart. Donde se heredaran las propiedades y metodos de las clases
 #### 1.2 Código
 ```dart
 
