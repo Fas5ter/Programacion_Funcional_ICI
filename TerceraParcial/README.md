@@ -39,7 +39,7 @@ defmodule Persona5 do
 end
 ```
 #### 1.3 Implementación
-```elixir
+```
 iex> c("main.ex")
 iex> Persona5.sexo(:m)
 iex> Persona5.sexo(:f)
@@ -53,6 +53,42 @@ iex> Persona5.sexo(:x)
 "sexo desconocido"
 ```
 
+### Ejercicio 1.2. Crear una calculadora usando switch case
+### 1.1 Descripcion del ejercicio
+  Se necesita crear una calculadora usando la sentencia switch case.
+#### 1.2 Código
+```elixir
+defmodule Matematicas do
+  def calculadora(opcion, {n1,n2}) do
+    case opcion do
+      "+" -> n1+n2
+      "-" -> n1-n2
+      "/" -> when n2 != 0 -> n1/n2
+      "/" -> when n2 == 0 -> "No se puede dividir por 0"
+      "*" -> n1*n2
+      _ -> :error
+    end
+  end
+end
+```
+#### 1.3 Implementación
+```elixir
+IO.inspect Matematicas.calculadora("+",{5,4})
+IO.inspect Matematicas.calculadora("-",{5,4})
+IO.inspect Matematicas.calculadora("/",{5,4})
+IO.inspect Matematicas.calculadora("/",{5,0})
+IO.inspect Matematicas.calculadora("*",{5,4})
+```
+#### 1.4 Salida
+```
+>elixir main.exs
+9
+1
+1.25
+"No se puede dividir por 0"
+20
+9
+```
 
 
 
