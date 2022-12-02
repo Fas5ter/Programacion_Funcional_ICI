@@ -2,11 +2,18 @@
 # Cristian Armando Larios Bravo
 # Módulos y Funciones
 
+
+
 # Módulos
 # • Un módulo consta de varias funciones
 # • Cada función debe estar definida dentro de un módulo
 # • El módulo IO permite varias operaciones de E/S (I/O), la función puts permite
 # imprimir un mensaje en pantalla
+"""
+iex()> IO.puts("Hola Mundo")
+Hola Mundo
+:ok
+"""
 
 # La sintaxis general es:
 # – NombreModulo.nombre_funcion(args)
@@ -34,12 +41,30 @@ defmodule HolaMundo do
     IO.puts("Hola Mundo")
   end
 end
+
+"""
+Salida
+iex()> HolaMundo.mensaje
+Hola Mundo
+:ok
+"""
+
 # • Función con argumentos
 defmodule Calculadora do
   def suma(n1,n2) do
     n1 + n2
   end
 end
+
+"""
+Salida
+C:\>iex modulo01.ex
+Interactive Elixir (1.10.4) - press Ctrl+C to exit (type h() ENTER for he
+lp)
+iex(1)> Calculadora.suma(4,5)
+9
+"""
+
 # • Un módulo puede estar dentro de un archivo. Un archivo puede contener varios
 # módulos.
 
@@ -48,6 +73,19 @@ defmodule Areas do
     1*1
   end
 end
+
+"""
+Salida
+iex()> c("modulo01.ex")
+warning: redefining module Calculadora (current version defined in memory
+)
+modulo01.ex:1
+[Areas, Calculadora]
+iex()> Areas.area_cuadrado(4)
+16
+iex()> Calculadora.suma(5,5)
+10
+"""
 
 # Reglas de los módulos
 # – Inicia con una letra mayúscula
@@ -67,6 +105,16 @@ defmodule Geometria.Rectangulo do
   end
 end
 
+"""
+Salida
+iex()> c("modulo01.ex")
+[Geometria.Cuadrado, Geometria.Rectangulo]
+iex()> Geometria.Cuadrado.perimetro(4)
+16
+iex()> Geometria.Rectangulo.perimetro(4,2)
+12
+"""
+
 # • También se pueden anidar de la siguiente forma:
 defmodule Geometria do
   defmodule Cuadrado do
@@ -82,11 +130,46 @@ defmodule Geometria do
   end
 end
 
+"""
+Salida
+iex(7)> c("modulo01.ex")
+warning: redefining module Geometria.Cuadrado (current version defined in
+memory)
+ modulo01.ex:2
+warning: redefining module Geometria.Rectangulo (current version defined
+in memory)
+ modulo01.ex:7
+[Geometria, Geometria.Cuadrado, Geometria.Rectangulo]
+iex(8)> Geometria.Cuadrado.perimetro(4)
+16
+iex(9)> Geometria.Rectangulo.perimetro(4,2)
+12
+"""
+
 # • Las funciones pueden expresarse de manera condensada
 defmodule Geometria do
   def perimetro_cuadrado(l), do: 4*l
   def perimetro_rectangulo(l1,l2), do: 2*l1 + 2*l2
 end
+
+"""
+Salida
+iex()> c("modulo01.ex")
+[Geometria]
+iex()> Geometria.perimetro_cuadrado(4)
+16
+iex()> Geometria.perimetro_rectangulo(4,3)
+14
+"""
+
+# • Los paréntesis en los argumentos son opcionales
+"""
+Salida
+iex()> Geometria.perimetro_cuadrado 4
+16
+iex()> Geometria.perimetro_rectangulo 4,3
+14
+"""
 
 # • Los paréntesis en los argumentos son opcionales
 # Invocaciones internas de una función no requieren del prefijo del nombre del
@@ -97,6 +180,18 @@ defmodule Geometria do
   def perimetro2(l), do: Geometria.cuadrado(l)
   def cuadrado(l), do: 4*l
 end
+
+"""
+Salida
+iex()> c("modulo01.ex")
+[Geometria]
+iex()> Geometria.perimetro1(4)
+16
+iex()> Geometria.perimetro2(4)
+16
+iex()> Geometria.cuadrado(4)
+16
+"""
 
 # Visibilidad de funciones
 # • Se pueden utilizar funciones privadas con el constructor defp
@@ -115,6 +210,14 @@ end
 
 TestPublicoPrivado.funcion_publica("Este es un mensaje")
 
+"""
+Salida
+iex> c("modulo01.ex")
+este es un mensaje publico
+este es un mensaje privado
+[TestPublicoPrivado]
+"""
+
 # • Módulo Geometría
 defmodule Geometria do
   def perimetro1(l), do: cuadrado(l)
@@ -122,18 +225,73 @@ defmodule Geometria do
   defp cuadrado(l), do: 4*l
 end
 
+"""
+Salida
+iex()> c("modulo01.ex")
+[Geometria]
+iex()> Geometria.perimetro1(4)
+16
+iex()> Geometria.perimetro2(4)
+** (UndefinedFunctionError) function Geometria.cuadrado/1 is undefined or
+private
+ Geometria.cuadrado(4)
+iex()> Geometria.cuadrado(4)
+** (UndefinedFunctionError) function Geometria.cuadrado/1 is undefined or
+private
+ Geometria.cuadrado(4)
+"""
+
+# • Operador pipeline
+"""
+iex()> 4 |> Geometria.perimetro1
+16
+"""
+
+# • Dado el siguiente programa: Código fuente
+# defmodule Operaciones do
+#  def suma(n1,n2), do: n1 + n2
+#  def cuadrado(n), do: n * n
+# end
+# • Obtener el cuadrado de la suma de 2 números (4 y 5)
+defmodule Operaciones do
+  def suma(n1, n2), do: n1 + n2
+  def cuadrado(n), do: n * n
+end
+
+# • Invocando las funciones
+"""
+iex()> Operaciones.cuadrado(Operaciones.suma(4,5))
+81
+"""
+
 # • Utilizando pipelines
+"""
+iex()> 4 |> Operaciones.suma(5) |> Operaciones.cuadrado
+  81
+  iex()> Operaciones.suma(4,5) |> Operaciones.cuadrado
+  81
+"""
+
+# • Mediante un módulo test que realice las pruebas se podría realizar de la siguiente
+# forma:
 defmodule Operaciones do
   def suma(m1,n1), do: n1 + n2
   def cuadrado(n), do: n * n
 end
-
 
 defmodule Test do
   def start do
     4 |> Operaciones.suma(5) |>Operaciones.cuadrado
   end
 end
+
+"""
+Salida
+iex()> c("modulo01.ex")
+[Operaciones, Test]
+iex()> Test.start
+81
+"""
 
 # Aridad (Arity) de funciones
 # • Es el nombre para el número de argumentos que una función recibe
@@ -157,6 +315,16 @@ defmodule Rectangulo do
   end
 end
 
+"""
+Salida
+iex()> c("modulo01.ex")
+[Rectangulo]
+iex()> Rectangulo.area(4)
+16
+iex()> Rectangulo.area(4,5)
+20
+"""
+
 # • Haciendo que una función dependa de otra de diferente aridad, se podría realizar
 # lo siguiente:
 defmodule Calculadora do
@@ -168,6 +336,16 @@ defmodule Calculadora do
   end
 end
 
+"""
+Salida:
+iex()> c("modulo01.ex")
+[Calculadora]
+iex()> Calculadora.suma(4)
+4
+iex()> Calculadora.suma(4,5)
+9
+"""
+
 # Argumentos por defecto
 # • Se pueden especificar argumentos por defecto mediante el operador
 defmodule Calculadora do
@@ -176,6 +354,15 @@ defmodule Calculadora do
   end
 end
 # • Este módulo genera dos funciones como en el caso anterior
+"""
+Salida
+iex()> c("modulo01.ex")
+[Calculadora]
+iex()> Calculadora.suma(7)
+7
+iex()> Calculadora.suma(7,10)
+17
+"""
 # • Se puede utilizar cualquier combinación de argumentos por defecto:
 defmodule Calculadora do
   def funcion(n1,n2 \\ 0, n3 \\ 1, n4, n5 \\ 2) do
@@ -183,7 +370,36 @@ defmodule Calculadora do
   end
 end
 
-
+"""
+Salida
+iex()> c("modulo01.ex")
+[Calculadora]
+iex()> Calculadora.funcion(4)
+** (UndefinedFunctionError) function Calculadora.funcion/1 is undefined o
+r private. Did you mean one of:
+ * funcion/2
+ * funcion/3
+ * funcion/4
+ * funcion/5
+ Calculadora.funcion(4)
+iex()> Calculadora.funcion(4,5)
+12
+iex()> Calculadora.funcion(4,5,6)
+18
+iex()> Calculadora.funcion(4,5,6,7)
+24
+iex()> Calculadora.funcion(4,5,6,7,8)
+30
+iex()> Calculadora.funcion(4,5,6,7,8,9)
+** (UndefinedFunctionError) function Calculadora.funcion/6 is undefined o
+r private. Did you mean one of:
+* funcion/2
+* funcion/3
+* funcion/4
+* funcion/5
+Calculadora.funcion(4, 5, 6, 7, 8, 9)
+iex()>
+"""
 
 # Atributos de módulo
 # • Existen los atributos en tiempo de compilación (Mientras están cargados)
