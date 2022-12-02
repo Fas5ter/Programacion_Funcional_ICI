@@ -53,7 +53,7 @@ iex> Persona5.sexo(:x)
 "sexo desconocido"
 ```
 
-### Ejercicio 1.2. Crear una calculadora usando switch case
+### Ejercicio 1.3. Crear una calculadora usando switch case
 ### 1.1 Descripcion del ejercicio
   Se necesita crear una calculadora usando la sentencia switch case.
 #### 1.2 Código
@@ -91,8 +91,77 @@ IO.inspect Matematicas.calculadora("*",{5,4})
 ```
 
 
+### Ejercicio 1.4. Crear un selector de dia utilizando cond
+### 1.1 Descripcion del ejercicio
+  Se necesita crear un selector de dia usando la sentencia cond.
+#### 1.2 Código
+```elixir
+defmodule DiaSemana do
+  def dia(d) do
+    cond do
+    d == 1 -> "Lunes"
+    d == 2 -> "Martes"
+    d == 3 -> "Miercoles"
+    d == 4 -> "Jueves"
+    d == 5 -> "Viernes"
+    d == 6 -> "Sabado"
+    d == 7 -> "Domingo"
+    true -> "Dia no valido"
+    end
+  end
+end
+```
+#### 1.3 Implementación
+```elixir
+IO.puts DiaSemana.dia(1)
+IO.puts DiaSemana.dia(2)
+IO.puts DiaSemana.dia(3)
+IO.puts DiaSemana.dia(4)
+IO.puts DiaSemana.dia(5)
+IO.puts DiaSemana.dia(6)
+IO.puts DiaSemana.dia(7)
+IO.puts DiaSemana.dia(8)
+```
+#### 1.4 Salida
+```
+>elixir main.ex
+Lunes
+Martes
+Miercoles
+Jueves
+Viernes
+Sabado
+Domingo
+El dia no es valido
+```
+
+### Ejercicio 1.4. Crear una calculadora usando switch case
+### 1.1 Descripcion del ejercicio
+  Se necesita crear una calculadora usando la sentencia switch case.
+#### 1.2 Código
+#### 1.3 Implementación
+#### 1.4 Salida
 
 
+### Ejercicio 1.4. Crear una calculadora usando switch case
+### 1.1 Descripcion del ejercicio
+  Se necesita crear una calculadora usando la sentencia switch case.
+#### 1.2 Código
+#### 1.3 Implementación
+#### 1.4 Salida
 
 
+### Ejercicio 1.4. Crear una calculadora usando switch case
+### 1.1 Descripcion del ejercicio
+  Se necesita crear una calculadora usando la sentencia switch case.
+#### 1.2 Código
+#### 1.3 Implementación
+#### 1.4 Salida
 
+
+### Ejercicio 1.4. Crear una calculadora usando switch case
+### 1.1 Descripcion del ejercicio
+  Se necesita crear una calculadora usando la sentencia switch case.
+#### 1.2 Código
+#### 1.3 Implementación
+#### 1.4 Salida
