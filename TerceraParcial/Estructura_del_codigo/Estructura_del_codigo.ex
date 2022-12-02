@@ -54,6 +54,7 @@ iex()> System.halt
 C:\>
 """
 
+# Cristian Larios
 # • Para pedir ayuda del Shell
 """
 iex()> h
@@ -117,6 +118,7 @@ iex()> dia_semana <se verifica el efecto de la refijación>
 7 <>
 """
 
+# Cristian Armando Larios Bravo
 # Variables
 # • Elixir es un lenguaje de programación dinámico
 # – NO es necesario declarar de manera explícita una variable o su tipo de
@@ -208,6 +210,7 @@ iex(1)> Calculadora.suma(4,5)
 9
 """
 
+# Cristian Larios
 # • Un módulo puede estar dentro de un archivo. Un archivo puede contener varios
 # módulos.
 
@@ -314,6 +317,7 @@ iex()> Geometria.perimetro_rectangulo 4,3
 14
 """
 
+# Cristian Armando Larios Bravo
 # • Los paréntesis en los argumentos son opcionales
 # Invocaciones internas de una función no requieren del prefijo del nombre del
 # módulo.
@@ -407,6 +411,7 @@ iex()> Operaciones.cuadrado(Operaciones.suma(4,5))
 81
 """
 
+# Cristian Larios
 # • Utilizando pipelines
 """
 iex()> 4 |> Operaciones.suma(5) |> Operaciones.cuadrado
@@ -544,6 +549,7 @@ Calculadora.funcion(4, 5, 6, 7, 8, 9)
 iex()>
 """
 
+# Cristian L
 # Atributos de módulo
 # • Existen los atributos en tiempo de compilación (Mientras están cargados)
 defmodule Geometria do
