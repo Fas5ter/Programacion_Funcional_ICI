@@ -183,6 +183,8 @@ defmodule Calculadora do
   end
 end
 
+
+
 # Atributos de módulo
 # • Existen los atributos en tiempo de compilación (Mientras están cargados)
 defmodule Geometria do
@@ -195,6 +197,19 @@ defmodule Geometria do
   end
 end
 
+"""
+Salida
+iex> c("main.ex")
+[Geometria]
+iex> alias Geometria, as: G
+Geometria
+iex> G.area(4)
+50.265472
+iex> G.circunferencia(4)
+25.132736
+"""
+
+# Cristian L
 # • Elixir permite el registro de atributos, que se almacenarán en el archivo binario.
 # – @moduledoc
 # – @doc
@@ -212,6 +227,613 @@ defmodule Geometria do
   def circunferencia(r), do: 2 * r * @pi
 end
 
+# • Para comprobar su uso, compilamos en la terminal el código fuente:
+# – C:>elixirc main.ex
+# • Esto va a generar el archivo:
+# – Elixir.Geometria.beam
+# • abrimos iex y verificamos la documentación:
+"""
+iex> Code.fetch_docs(Geometria)
+{:docs_v1, 2, :elixir, "text/markdown",
+ %{"en" => "Calcula el area y el perimetro de un circulo"}, %{},
+ [
+ {{:function, :area, 1}, 6, ["area(r)"],
+ %{"en" => "calcula el area del circulo"}, %{}},
+ {{:function, :circunferencia, 1}, 9, ["circunferencia(r)"],
+ %{"en" => "calcula el perimetro de un circulo"}, %{}}
+ ]}
+iex> h Geometria
+* Geometria
+Calcula el area y el perimetro de un circulo
+iex> h Geometria.area
+* def area(r)
+calcula el area del circulo
+iex> h Geometria.circunferencia
+* def circunferencia(r)
+calcula el perimetro de un circulo
+iex(6)>
+"""
+
+# Tipos de datos
+# • Elixir utiliza el mismo sistema de tipos de Erlang
+# Numeros
+# • Los números (numbers) pueden ser enteros o flotantes
+"""
+iex> 3
+3
+iex> is_number(3)
+true
+iex> 3.5
+3.5
+iex> is_number(3.5)
+true
+"""
+
+# Integer
+"""
+iex> is_integer(3)
+true
+iex> is_float(3)
+false
+iex> i 34 #inspect
+Term
+ 34
+Data type
+ Integer
+ Reference modules
+ Integer
+Implemented protocols
+ IEx.Info, Inspect, List.Chars, String.Chars
+"""
+
+# Float
+"""
+iex> is_integer(3.5)
+false
+iex> is_float(3.5)
+true
+iex> i(3.5)
+Term
+ 3.5
+Data type
+ Float
+Reference modules
+ Float
+Implemented protocols
+ IEx.Info, Inspect, List.Chars, String.Chars
+"""
+
+# Notación científica
+"""
+iex> 3.25555e-3
+0.00325555
+iex> 3.25555e3
+3255.55
+iex>i 3.25555e3
+Term
+ 3255.55
+Data type
+ Float
+Reference modules
+ Float
+Implemented protocols
+ IEx.Info, Inspect, List.Chars, String.Chars
+"""
+
+# Operaciones aritméticas
+"""
+iex> 5 * 4 / 3 + 2 - 5
+3.666666666666668
+iex> 5/4
+1.25
+iex> 5/5
+1.0
+iex> div(5,5)
+1
+iex> rem(5,5)
+0
+"""
+
+# • Piso de un número flotante
+"""
+iex> trunc(5/2)
+2
+iex> floor(5/2)
+2
+"""
+
+# • Techo (cielo) de un número flotante
+"""
+iex> round(5/2)
+3
+iex> ceil(5/2)
+3
+"""
+
+# • Números binarios
+"""
+iex> 0b10101001111
+1359
+# • Números octales
+iex> 0o74754
+31212
+"""
+
+# • Números hexadecimales
+"""
+iex> 0xFFFF
+65535
+"""
+
+# • Azucar Sintáctica para los números
+"""
+iex> 1_000_000
+1000000
+iex> 1_000_000.123
+1000000.123
+"""
+
+# Atoms
+# • Constantes literales nombradas
+# • es una constante cuyo nombre es su propio valor
+# • inician con : (dos puntos)
+# • seguidos de caracteres alfanuméricos y/o subrayados
+# • se pueden usar espacios en blanco si se ponen entre comillas
+"""
+iex> :atom
+:atom
+iex> is_atom(:atom)
+true
+iex> is_atom(:es_un_atom)
+true
+iex> is_atom(:"es un atom")
+true
+iex> i :ok
+Term
+ :ok
+Data type
+Atom
+Reference modules
+ Atom
+Implemented protocols
+ IEx.Info, Inspect, List.Chars, String.Chars
+"""
+
+# • Un atom consta de dos partes:
+# – texto: el que se pone después de los dos puntos
+# – valor: es la referencia a la tabla de atoms.
+"""
+iex> var_atom = :atom
+:atom
+iex> var_atom
+:atom
+iex> :atom = var_atom
+:atom
+"""
+
+# • Un atom se puede nombrar con mayúscula inicial
+"""
+iex> is_atom(Un_atom)
+true
+iex> Un_atom = Elixir.Un_atom
+"""
+
+# Un_atom
+# • Atomos como booleanos
+# • Los valores booleanos son atoms
+"""
+iex> is_atom(true)
+true
+iex> is_boolean(true)
+true
+iex> is_boolean(:true)
+true
+iex> is_boolean(:atom)
+false
+iex> :true == true
+true
+iex> :false == false
+true
+"""
+
+# Atoms and, or y not
+"""
+iex> true and true
+true
+iex> true and false
+false
+iex> true or true
+true
+iex> true or false
+true
+iex> not false
+true
+iex> not true
+false
+iex> not not true
+"""
+
+# Nil
+# • similar al null de otros lenguajes
+"""
+iex> is_atom(nil)
+true
+iex> is_atom(:nil)
+true
+iex> nil == :nil
+true
+"""
+
+# • Los átomos nil y false son tratados como valores falsos, mientras que todo lo
+# demás es tratado como un valor de verdad.
+# • Esta propiedad es útil con los operadores de cortocircuito:
+# – || -> retorna la primera expresión verdadera
+# – && -> retorna la segunda siempre y cuando la primera lo sea también
+# – ! -> retorna la negación de la expresión sin importar el tipo de dato
+# • || -> retorna la primera expresión verdadera
+"""
+iex> false || nil || 5 || true
+5
+iex> false || nil || 5 || false || true
+5
+iex> false || nil || false || false || true || 5
+true
+"""
+
+# • && -> retorna la segunda siempre y cuando la primera lo sea también
+"""
+iex> false && 5
+false
+iex> nil && 5
+nil
+iex> true && 5
+5
+iex> true && true
+true
+iex> 5 && true
+true
+iex> true && 5 && 4
+4
+iex> false && 5 && 4
+false
+iex> true && false && 4
+false
+iex> true && 4 && false
+false
+"""
+
+# • ! ! -> retorna la negación de la expresión sin importar el tipo de dato
+"""
+iex> !true
+false
+iex> !false
+true
+iex> !5
+false
+iex> !nil
+true
+iex> not !4
+true
+iex> !(5+4)
+false
+iex> not(5+4)
+** (ArgumentError) argument error
+ :erlang.not(9)
+"""
+
+# Tuplas
+# • son como estructuras o registros
+# • permiten agrupar elementos fijos
+"""
+iex>persona = {"Alex", 49}
+{"Alex", 49}
+iex> i {"Alex", 49}
+Term
+ {"Alex", 49}
+Data type
+ Tuple
+Reference modules
+ Tuple
+Implemented protocols
+ IEx.Info, Inspect
+"""
+
+# • Para extraer elementos se usa la función elem
+"""
+iex> nombre = elem(persona, 0)
+"Alex"
+iex> nombre
+"Alex"
+iex> edad = elem(persona,1)
+49
+iex> edad
+49
+"""
+
+# • Para modificar un elemento se usa la función put_elem
+# Cristian Armando Larios Bravo
+"""
+iex> put_elem(persona,0,"Alexander")
+{"Alexander", 49}
+"""
+
+
+# • Las tuplas son inmutables, por lo que no se modifica
+iex> persona
+"""{"Alex", 49}"""
+
+# • Si se necesita cambiar, hay que almacenar el cambio en otra variable, o en la
+# misma si ya no se desea conservar los valores
+"""
+iex> persona = put_elem(persona,0,"Alexander")
+{"Alexander", 49}
+iex> persona
+{"Alexander", 49}
+"""
+
+# Listas
+# • Manejo dinámico de datos
+# • Funcionan como listas enlazadas simples
+"""
+iex> numeros_pares = [2,4,6,8,10]
+[2, 4, 6, 8, 10]
+iex> i [2, 4, 6, 8, 10]
+Term
+ [2, 4, 6, 8, 10]
+Data type
+ List
+Reference modules
+ List
+Implemented protocols
+ Collectable, Enumerable, IEx.Info, Inspect, List.Chars, String.Chars
+iex> length(numeros_pares)
+5
+"""
+
+
+# • Obtener un elemento de la lista mediante la función Enum.at/2
+"""
+iex> Enum.at(numeros_pares,4)
+10
+iex> Enum.at(numeros_pares,5)
+nil
+"""
+
+# • Se puede saber si x elemento pertenece a una lista con operador in
+"""
+iex> 2 in numeros_pares
+true
+iex> 12 in numeros_pares
+false
+"""
+
+# • Módulo List
+# – Modificar o reemplazar un elemento de la lista
+"""
+iex> List.replace_at(numeros_pares,4,12)
+[2, 4, 6, 8, 12]
+iex> numeros_pares
+[2, 4, 6, 8, 10]
+iex> nuevos_pares = List.replace_at(numeros_pares,4,12)
+[2, 4, 6, 8, 12]
+iex> numeros_pares = List.replace_at(numeros_pares,4,12)
+[2, 4, 6, 8, 12]
+"""
+
+# • Insertar un elemento
+"""
+iex> numeros_pares
+[2, 4, 6, 8, 12]
+iex> numeros_pares = List.insert_at(numeros_pares,4,10)
+[2, 4, 6, 8, 10, 12]
+iex> numeros_pares = List.insert_at(numeros_pares,-1,14)
+[2, 4, 6, 8, 10, 12, 14]
+"""
+
+# • Concatenar dos listas
+"""
+iex> numeros_naturales = [1,2,3,4] ++ [5,6,7,8]
+[1, 2, 3, 4, 5, 6, 7, 8]
+iex> numeros_naturales
+[1, 2, 3, 4, 5, 6, 7, 8]
+"""
+
+# • Recursion sobre listas
+# – El formato de una lista es [head | tail]
+# – head puede ser de cualquier tipo
+# – tail siempre es una lista
+# – si tail es una lista vacía [], indica que es el final de la lista.
+"""
+iex> []
+[]
+iex> [1|[]]
+[1]
+iex> [1|[2|[]]]
+[1, 2]
+iex> [1|[2|[3|[]]]]
+[1, 2, 3]
+iex> [1|[2|[3|[4|[]]]]]
+[1, 2, 3, 4]
+iex> [1|[2,3,4]]
+[1, 2, 3, 4]
+"""
+
+# • Funciones hd y tl
+"""
+iex> numeros = [1,2,3,4,5]
+[1, 2, 3, 4, 5]
+iex> hd(numeros)
+1
+iex> tl(numeros)
+[2, 3, 4, 5]
+iex> [head | tail] = numeros
+[1, 2, 3, 4, 5]
+iex> head
+1
+iex> tail
+[2, 3, 4, 5]
+"""
+
+# • Agregar elementos a una lista
+"""
+iex> numeros = [0 | numeros]
+[0, 1, 2, 3, 4, 5]
+iex> numeros
+[0, 1, 2, 3, 4, 5]
+"""
+
+# Mapas
+# • par llave-valor
+# • pueden ser cualquier término
+"""
+iex> persona = %{:nombre => "Cristian", :edad => 18, :trabajo =>"programador"}
+%{edad: 18, nombre: "Cristian", trabajo: "programador"}
+iex> persona
+%{edad: 18, nombre: "Cristian", trabajo: "programador"}
+iex> consonantes = %{:z => "zeta", :m => "eme", :x => "equis", :b => "be"
+}
+%{b: "be", m: "eme", x: "equis", z: "zeta"}
+iex> consonantes = %{:z => "zeta", :m => "eme", :x => "equis", :b => "be"
+, :n => "ene"}
+%{b: "be", m: "eme", n: "ene", x: "equis", z: "zeta"}
+iex> consonantes = %{:z => "zeta", :m => "eme", :x => "equis", :b => "be"
+, :n => "ene", :a => "aaaa"}
+%{a: "aaaa", b: "be", m: "eme", n: "ene", x: "equis", z: "zeta"}
+"""
+
+# Cristian Armando Larios Bravo
+# • Otra forma de representar los mapas:
+"""
+iex> %{nombre: "Cristian", paterno: "Larios", edad: 18}
+%{edad: 18, nombre: "Cristian", paterno: "Larios"}
+"""
+
+
+# • Acceder a un elementro a través de su llave
+"""
+iex> persona = %{:nombre => "Cristian", :edad => 18, :trabajo =>"programador"}
+%{edad: 18, nombre: "Cristian", trabajo: "programador"}
+iex> persona[:nombre]
+"Cristian"
+iex> persona[:edad]
+18
+iex> persona[:apellido]
+nil
+"""
+
+# • Ventajas de usar atoms como llave
+
+"""
+iex> persona.nombre
+"Cristian"
+iex> persona.edad
+18
+iex> persona.apellido
+** (KeyError) key :apellido not found in: %{edad: 18, nombre: "Cristian", tra
+bajo: "programador"}
+• Insertar un nuevo llave-par
+iex> Map.put(persona, :apellido, "Larios")
+%{apellido: "Larios", edad: 18, nombre: "Cristian", trabajo: "programador"}
+iex> persona
+%{edad: 18, nombre: "Cristian", trabajo: "programador"}
+"""
+
+# • Insertar un nuevo llave-par
+
+"""
+iex> Map.put(persona, :apellido, "Larios")
+%{apellido: "Larios", edad: 18, nombre: "Cristian", trabajo: "Programador"}
+iex> persona
+%{edad: 18, nombre: "Cristian", trabajo: "Programador"}
+"""
+
+# • Obtener el valor de una llave con Map
+
+"""
+iex> Map.get(persona, :nombre)
+"Cristian"
+iex> persona.nombre
+"Cristian"
+iex> persona[:nombre]
+"Cristian"
+"""
+
+# Binaries
+# • Un binary es un grupo de bytes
+# • cada numero representa un valor que corresponde a un byte
+# • cualquier valor mayor a 255 se trunca al valor en byte
+
+"""
+iex(14)> <<1,2,3,4,5>>
+<<1, 2, 3, 4, 5>>
+iex> <<255>>
+<<255>>
+iex> <<256>>
+<<0>>
+iex> <<257>>
+<<1>>
+iex> <<512>>
+<<0>>
+"""
+
+# Strings (Binary Strings)
+# • No existe un tipo String dedicado
+# • Los Strings se representan como binary o list
+# • Lo más sencillo es usar dobles comillas
+
+"""
+iex> "Esto es un String"
+"Esto es un String"
+"""
+
+# • Se pueden insertar expresiones en las cadenas (interpolación de cadenas)
+# mediante #{}
+"""
+iex> "El cuadrado de 2 es #{2*2}"
+"El cuadrado de 2 es 4"
+"""
+
+# • Secuencias de escape:
+# – "
+# – \"
+# – \t
+IO.puts("1. Este es un mensaje")
+IO.puts("2. Este es un  \n mensaje")
+IO.puts("3. Este es un \"mensaje\"")
+IO.puts("4. Este es un \\mensaje\\")
+IO.puts("5. Este \t es \tun \t mensaje")
+IO.puts("4. Este
+es un
+mensaje")
+
+"""
+Salida
+>elixir main.ex
+1. Este es un mensaje
+2. Este es un
+ mensaje
+3. Este es un "mensaje"
+4. Este es un \mensaje\
+5. Este es un mensaje
+4. Este
+ es un
+ mensaje
+
+"""
+
+
+# • sigils
+IO.puts(~s("este es un ejemplo de sigil" apuntes de Elixir))
+IO.puts("Este \t es \tun \t mensaje")
+IO.puts(~S("Este \t es \tun \t mensaje"))
+
+"""
+Salida
+"este es un ejemplo de sigil" apuntes de Elixir
+Este es un mensaje
+"Este \t es \tun \t mensaje"
+"""
+
 # • Concatenación de Cadenas
 defmodule Cadena do
   def concatenar(cad1, cad2, separador \\ " ") do
@@ -222,7 +844,91 @@ end
 IO.puts(Cadena.concatenar("Hola", "Mundo"))
 IO.puts(Cadena.concatenar("Hola", "Mundo", "<->"))
 
+"""
+Salida
+>elixir main.ex
+Hola Mundo
+Hola<->Mundo
+"""
+
 # Pattern Matching
+# • Operador pin: ^
+# • Evita la refijación (rebind)
+"""
+iex> x = 3
+3
+iex> 3 = x
+3
+iex> 5 = x
+** (MatchError) no match of right hand side value: 3
+iex> x = 5
+5
+iex> x
+5
+iex> ^x = 5
+5
+iex> ^x = 10
+** (MatchError) no match of right hand side value: 10
+iex> 10 = x
+** (MatchError) no match of right hand side value: 5
+• Tuplas
+iex> leer_archivo_ok = {:ok, "texto del archivo"}
+{:ok, "texto del archivo"}
+iex> leer_archivo_error = {:error, "No se pudo leer el archivo"}
+{:error, "No se pudo leer el archivo"}
+iex(8)> {:ok, respuesta} = leer_archivo_ok
+{:ok, "texto del archivo"}
+iex(9)> respuesta
+"texto del archivo"
+iex(10)> {:error, respuesta} = leer_archivo_error
+{:error, "No se pudo leer el archivo"}
+iex(11)> respuesta
+"No se pudo leer el archivo"
+"""
+# • Ejemplo:
+"""
+iex> respuesta = {:ok, "texto del archivo"}
+{:ok, "texto del archivo"}
+iex> case respuesta do
+...> {:ok, res} -> "Operacion exitosa: Contenido #{res}"
+...> {:error, res} -> "Operacion fallida: #{res}"
+...> _ -> "Valor por default"
+...> end
+"Operacion exitosa: Contenido texto del archivo"
+iex> respuesta = {:error, "No se pudo leer el archivo"}
+{:error, "No se pudo leer el archivo"}
+iex> case respuesta do
+...> {:ok, res} -> "Operacion exitosa: Contenido #{res}"
+...> {:error, res} -> "Operacion fallida: #{res}"
+...> _ -> "Valor por default"
+...> end
+"Operacion fallida: No se pudo leer el archivo"
+"""
+
+# • Listas
+"""
+iex> [head | tail] = [1,2,3,4]
+[1, 2, 3, 4]
+iex> head
+1
+iex> tail
+[2, 3, 4]
+iex> [head | _] = [1,2,3,4]
+[1, 2, 3, 4]
+iex> head
+1
+iex> [_ | tail] = [1,2,3,4]
+[1, 2, 3, 4]
+iex> tail
+[2, 3, 4]
+iex> mi_lista = [1,2,3,4]
+[1, 2, 3, 4]
+iex> [1,2,x,4] = mi_lista
+[1, 2, 3, 4]
+iex> x
+3
+"""
+
 # • Funciones
 defmodule Calculadora do
   def div(_,0) do
@@ -235,6 +941,13 @@ end
 
 IO.inspect(Calculadora.div(5,0))
 IO.inspect(Calculadora.div(5,3))
+
+"""
+Salida
+>elixir main.ex
+{:error, "No se puede dividir por 0"}
+{:ok, "El resultado es: 1.6666666666666667"}
+"""
 
 # • Si invertimos el orden de las funciones, es decir:
 defmodule Calculadora do
@@ -249,6 +962,18 @@ end
 IO.inspect(Calculadora.div(5,0))
 IO.inspect(Calculadora.div(5,3))
 
+"""
+Salida
+>elixir main.ex
+warning: this clause for div/2 cannot match because a previous clause at
+line 2 always matches
+ main.ex:5
+** (ArithmeticError) bad argument in arithmetic expression
+ main.ex:3: Calculadora.div/2
+ main.ex:10: (file)
+ (elixir 1.10.4) lib/code.ex:926: Code.require_file/2
+"""
+
 # Guardas
 defmodule Numero do
   def cero?(0), do: true
@@ -259,6 +984,15 @@ end
 IO.puts(Numero.cero?(0))
 IO.puts(Numero.cero?(2))
 IO.puts(Numero.cero?("3"))
+
+"""
+Salida
+>elixir main.ex
+true
+false
+No es entero
+
+"""
 
 # Condicionales
 # if
@@ -275,6 +1009,18 @@ defmodule Persona1 do
   end
 end
 
+"""
+Salida
+iex> c("main.ex")
+[Persona1]
+iex> Persona1.sexo(:m)
+"Masculino"
+iex> Persona1.sexo(:f)
+"Femenino"
+iex> Persona1.sexo(:x)
+"Femenino"
+"""
+
 # • if, ejemplo 2
 defmodule Persona2 do
   def sexo(sex) do
@@ -289,6 +1035,18 @@ defmodule Persona2 do
   end
 end
 
+"""
+Salida
+iex> c("main.ex")
+[Persona2]
+iex> Persona2.sexo(:m)
+"Masculino"
+iex> Persona2.sexo(:f)
+"Femenino"
+iex> Persona2.sexo(:x)
+"Sexo desconocido"
+"""
+
 # case
 # • case, ejemplo 1
 
@@ -301,6 +1059,18 @@ defmodule Persona3 do
     end
   end
 end
+
+"""
+Salida
+iex> c("main.ex")
+[Persona3]
+iex> Persona3.sexo(:m)
+"Masculino"
+iex> Persona3.sexo(:f)
+"Femenino"
+iex> Persona3.sexo(:x)
+"Sexo desconocido"
+"""
 
 # • Match con funciones, ejemplo 1
 defmodule Persona4 do
@@ -315,6 +1085,17 @@ defmodule Persona4 do
   end
 end
 
+"""
+Salida
+iex> c("main.ex")
+[Persona4]
+iex> Persona4.sexo(:m)
+"Masculino"
+iex> Persona4.sexo(:f)
+"Femenino"
+iex> Persona4.sexo(:x)
+"sexo desconocido"
+"""
 
 # Match con funciones
 # • Ejemplo 2
@@ -323,6 +1104,19 @@ defmodule Persona5 do
   def sexo(sex) when sex == :f, do: "Femenino"
   def sexo(_sex), do: "Sexo desconocido"
 end
+
+"""
+Salida
+iex> c("main.ex")
+[Persona5]
+iex> Persona5.sexo(:m)
+"Masculino"
+iex> Persona5.sexo(:f)
+"Femenino"
+iex> Persona5.sexo(:x)
+"sexo desconocido"
+
+"""
 
 # cond
 # • cond, ejemplo 1
@@ -335,6 +1129,18 @@ defmodule Persona6 do
     end
   end
 end
+
+"""
+Salida
+iex> c("main.ex")
+[Persona6]
+iex> Persona6.sexo(:m)
+"Masculino"
+iex> Persona6.sexo(:f)
+"Femenino"
+iex> Persona6.sexo(:x)
+"Sexo desconocido"
+"""
 
 # Doctest
 # • Se realiza a partir de la documentación de las funciones
@@ -386,6 +1192,17 @@ IO.inspect Matematicas.calculadora("/",{5,4})
 IO.inspect Matematicas.calculadora("/",{5,0})
 IO.inspect Matematicas.calculadora("*",{5,4})
 
+"""
+Salida
+>elixir main.exs
+9
+1
+1.25
+"No se puede dividir por 0"
+20
+9
+"""
+
 # cond
 # • Ejemplo 1
 defmodule DiaSemana do
@@ -411,6 +1228,19 @@ IO.puts DiaSemana.dia(5)
 IO.puts DiaSemana.dia(6)
 IO.puts DiaSemana.dia(7)
 IO.puts DiaSemana.dia(8)
+
+"""
+Salida
+>elixir main.ex
+Lunes
+Martes
+Miercoles
+Jueves
+Viernes
+Sabado
+Domingo
+El dia no es valido
+"""
 
 # cond
 # • Ejemplo 2
@@ -449,6 +1279,28 @@ IO.puts DiaSemana.dia("D")
 IO.puts DiaSemana.dia("Ma")
 IO.puts DiaSemana.dia("mA")
 
+"""
+Salida
+>elixir main.ex
+Lunes
+Martes
+Miercoles
+Jueves
+Viernes
+Sabado
+Domingo
+Lunes
+Martes
+Miercoles
+Jueves
+Viernes
+Sabado
+Domingo
+El dia no es valido
+El dia no es valido
+"""
+
+# CALB
 # cond
 # • Ejemplo 3
 defmodule DiaSemana do
@@ -486,6 +1338,27 @@ IO.puts DiaSemana.dia("D")
 IO.puts DiaSemana.dia("Ma")
 IO.puts DiaSemana.dia("mA")
 
+"""
+Salida
+>elixir main.ex
+Lunes
+Martes
+Miercoles
+Jueves
+Viernes
+Sabado
+Domingo
+Lunes
+Martes
+Miercoles
+Jueves
+Viernes
+Sabado
+Domingo
+Martes
+Martes
+"""
+
 # unless
 # • Ejemplo 1
 defmodule MayorDeEdad do
@@ -496,6 +1369,16 @@ defmodule MayorDeEdad do
   end
 end
 
+"""
+Salida
+> c("main.ex")
+[MayorDeEdad]
+iex> MayorDeEdad.mayor(16)
+"Es menor de edad"
+iex> MayorDeEdad.mayor1(18)
+nil
+"""
+
 # unless
 # • Ejemplo 2
 defmodule MayorDeEdad do
@@ -505,6 +1388,20 @@ defmodule MayorDeEdad do
     end
   end
 end
+
+"""
+Salida
+iex> c("main.ex")
+[MayorDeEdad]
+iex> MayorDeEdad.mayor1(16)
+"Es menor de edad"
+iex> MayorDeEdad.mayor2(16)
+"Es menor de edad"
+iex(61)> MayorDeEdad.mayor1(18)
+nil
+iex(62)> MayorDeEdad.mayor2(18)
+nil
+"""
 
 # Funciones anónimas
 # • No tienen nombre
@@ -521,6 +1418,15 @@ suma_anonima = fn(n1,n2) -> n1 + n2 end
 IO.puts(Calculadora.suma(5,4))
 IO.puts(Suma_anonima(5,5))
 
+"""
+Salida
+>elixir main.ex
+9
+10
+
+"""
+
+# CALB
 # Ejemplos de funciones anónimas
 # • Ejemplo 2
 mayor? = fn(n1,n2) -> if n1 > n2 do true else false end end
@@ -529,12 +1435,29 @@ IO.inspect(mayor?.(4,5))
 IO.inspect(mayor?.(5,4))
 IO.inspect(mayor?.(5,5))
 
+"""
+• Salida
+>elixir main.exs
+false
+true
+false
+
+"""
+
 # • Ejemplo de función anónima
 # • Si se desea personalizar la salida
 mayor? = fn(n1,n2) -> if n1 > n2 do :si else :no end end
 
 IO.inspect(mayor?.(4,5))
 IO.inspect(mayor?.(5,4))
+
+"""
+Salida
+>elixir main.exs
+:no
+:si
+
+"""
 
 # Ejemplos de funciones anónimas
 # • Ejemplo 3
@@ -543,6 +1466,13 @@ res = mayor?.(4,5)
 IO.puts res
 res = mayor?.(5,4)
 IO.puts res
+
+"""
+Salida
+>elixir main.exs
+no
+si
+"""
 
 # Ejemplos de funciones anónimas
 # • Ejemplo 4
@@ -558,6 +1488,14 @@ end
 IO.inspect(mayor?.(4,5))
 IO.inspect(mayor?.(5,4))
 IO.inspect(mayor?.(5,5))
+
+"""
+Salida
+>elixir main.exs
+{:error, "4 <= 5"}
+{:ok, "5 > 4"}
+{:error, "5 <= 5"}
+"""
 
 # Ejemplos de funciones anónimas
 # • Ejemplo 5
@@ -585,6 +1523,7 @@ ok
 5 > 4
 """
 
+# Cristian Larios
 # Operador Pipe
 # • Dada una lista con n numeros, se desea obtener el cuadrado de la suma de los
 # elementos de la cola. Si la lista es [1,2,3,4,5], el resultado es (2+3+4+5)^2
@@ -707,6 +1646,7 @@ Salida
 196
 """
 
+# Cristian Larios
 # Loops y recursión
 # Rangos (range)
 # • Representan una secuencia de números
@@ -804,6 +1744,7 @@ true
 # unzip/1 with_index/1 with_index/2
 # zip/1 zip/2
 
+# Cristian Larios
 # for
 # • Ejemplo 1
 # • Contar del 1 al 10
