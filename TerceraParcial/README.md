@@ -176,7 +176,7 @@ end
 suma_anonima = fn(n1,n2) -> n1 + n2 end
 ```
 #### 1.3 Implementación
-```
+```elixir
 IO.puts(Calculadora.suma(5,4))
 IO.puts(Suma_anonima(5,5))
 ```
