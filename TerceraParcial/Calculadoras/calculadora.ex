@@ -1,3 +1,5 @@
+# Apuntes Elixir
+# Cristian Armando Larios Bravo
 defmodule Calculadora1 do
   def suma(n1,n2) do
     n1 + n2
@@ -25,7 +27,3 @@ defmodule DistCalculator do
     IO.puts(n1+n2)
   end
 end
-
-
-# Pagina 36 de shell erlang ejercicios
-# Pagina 50 de shell de elixir 
