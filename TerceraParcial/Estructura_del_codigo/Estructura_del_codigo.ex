@@ -929,7 +929,7 @@ iex> persona
 
 # • Si se necesita cambiar, hay que almacenar el cambio en otra variable, o en la
 # misma si ya no se desea conservar los valores
-"""
+# """
 iex> persona = put_elem(persona,0,"Alexander")
 {"Alexander", 49}
 iex> persona
@@ -939,7 +939,7 @@ iex> persona
 # Listas
 # • Manejo dinámico de datos
 # • Funcionan como listas enlazadas simples
-"""
+# """
 iex> numeros_pares = [2,4,6,8,10]
 [2, 4, 6, 8, 10]
 iex> i [2, 4, 6, 8, 10]
@@ -957,7 +957,7 @@ iex> length(numeros_pares)
 
 
 # • Obtener un elemento de la lista mediante la función Enum.at/2
-"""
+# """
 iex> Enum.at(numeros_pares,4)
 10
 iex> Enum.at(numeros_pares,5)
@@ -965,7 +965,7 @@ nil
 """
 
 # • Se puede saber si x elemento pertenece a una lista con operador in
-"""
+# """
 iex> 2 in numeros_pares
 true
 iex> 12 in numeros_pares
@@ -986,7 +986,7 @@ iex> numeros_pares = List.replace_at(numeros_pares,4,12)
 """
 
 # • Insertar un elemento
-"""
+# """
 iex> numeros_pares
 [2, 4, 6, 8, 12]
 iex> numeros_pares = List.insert_at(numeros_pares,4,10)
@@ -996,7 +996,7 @@ iex> numeros_pares = List.insert_at(numeros_pares,-1,14)
 """
 
 # • Concatenar dos listas
-"""
+# """
 iex> numeros_naturales = [1,2,3,4] ++ [5,6,7,8]
 [1, 2, 3, 4, 5, 6, 7, 8]
 iex> numeros_naturales
@@ -1008,7 +1008,7 @@ iex> numeros_naturales
 # – head puede ser de cualquier tipo
 # – tail siempre es una lista
 # – si tail es una lista vacía [], indica que es el final de la lista.
-"""
+# """
 iex> []
 []
 iex> [1|[]]
@@ -1050,7 +1050,7 @@ iex> numeros
 # Mapas
 # • par llave-valor
 # • pueden ser cualquier término
-"""
+# """
 iex> persona = %{:nombre => "Cristian", :edad => 18, :trabajo =>"programador"}
 %{edad: 18, nombre: "Cristian", trabajo: "programador"}
 iex> persona
@@ -1068,14 +1068,14 @@ iex> consonantes = %{:z => "zeta", :m => "eme", :x => "equis", :b => "be"
 
 # Cristian Armando Larios Bravo
 # • Otra forma de representar los mapas:
-"""
+# """
 iex> %{nombre: "Cristian", paterno: "Larios", edad: 18}
 %{edad: 18, nombre: "Cristian", paterno: "Larios"}
 """
 
 
 # • Acceder a un elementro a través de su llave
-"""
+# """
 iex> persona = %{:nombre => "Cristian", :edad => 18, :trabajo =>"programador"}
 %{edad: 18, nombre: "Cristian", trabajo: "programador"}
 iex> persona[:nombre]
@@ -1088,7 +1088,7 @@ nil
 
 # • Ventajas de usar atoms como llave
 
-"""
+# """
 iex> persona.nombre
 "Cristian"
 iex> persona.edad
@@ -1105,7 +1105,7 @@ iex> persona
 
 # • Insertar un nuevo llave-par
 
-"""
+# """
 iex> Map.put(persona, :apellido, "Larios")
 %{apellido: "Larios", edad: 18, nombre: "Cristian", trabajo: "Programador"}
 iex> persona
@@ -1114,7 +1114,7 @@ iex> persona
 
 # • Obtener el valor de una llave con Map
 
-"""
+# """
 iex> Map.get(persona, :nombre)
 "Cristian"
 iex> persona.nombre
@@ -1128,7 +1128,7 @@ iex> persona[:nombre]
 # • cada numero representa un valor que corresponde a un byte
 # • cualquier valor mayor a 255 se trunca al valor en byte
 
-"""
+# """
 iex(14)> <<1,2,3,4,5>>
 <<1, 2, 3, 4, 5>>
 iex> <<255>>
@@ -1146,14 +1146,14 @@ iex> <<512>>
 # • Los Strings se representan como binary o list
 # • Lo más sencillo es usar dobles comillas
 
-"""
+# """
 iex> "Esto es un String"
 "Esto es un String"
 """
 
 # • Se pueden insertar expresiones en las cadenas (interpolación de cadenas)
 # mediante #{}
-"""
+# """
 iex> "El cuadrado de 2 es #{2*2}"
 "El cuadrado de 2 es 4"
 """
@@ -1171,7 +1171,7 @@ IO.puts("4. Este
 es un
 mensaje")
 
-"""
+# """
 Salida
 >elixir main.ex
 1. Este es un mensaje
@@ -1573,7 +1573,7 @@ Salida
 defmodule DiaSemana do
   def dia(d) do
     cond do
-      d == 1 -> "Lunes"
+    d == 1 -> "Lunes"
     d == 2 -> "Martes"
     d == 3 -> "Miercoles"
     d == 4 -> "Jueves"
