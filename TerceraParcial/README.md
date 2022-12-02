@@ -135,33 +135,135 @@ Domingo
 El dia no es valido
 ```
 
-### Ejercicio 1.4. Crear una calculadora usando switch case
+### Ejercicio 1.5. Crear un programa que indique si la edad es menor de edad usando unless.
 ### 1.1 Descripcion del ejercicio
-  Se necesita crear una calculadora usando la sentencia switch case.
+  Se necesita crear un programa que indique si es menor de edad usando la sentencia unless.
 #### 1.2 Código
+```elixir
+defmodule MayorDeEdad do
+  def mayor1(edad) do
+    unless edad >= 18 do
+      "Es menor de edad"
+    end
+  end
+end
+```
 #### 1.3 Implementación
+```
+iex> c("main.ex")
+iex> MayorDeEdad.mayor1(16)
+iex> MayorDeEdad.mayor2(16)
+iex(61)> MayorDeEdad.mayor1(18)
+iex(62)> MayorDeEdad.mayor2(18)
+```
 #### 1.4 Salida
+```
+[MayorDeEdad]
+"Es menor de edad"
+"Es menor de edad"
+nil
+nil
+```
 
-
-### Ejercicio 1.4. Crear una calculadora usando switch case
+### Ejercicio 1.6. Crear una calculadora usando funciones anonimas
 ### 1.1 Descripcion del ejercicio
-  Se necesita crear una calculadora usando la sentencia switch case.
+  Se necesita crear una calculadora usando funciones anonimas.
 #### 1.2 Código
+```elixir
+defmodule Calculadora do
+  def suma(n1,n2), do: n1+n2
+end
+suma_anonima = fn(n1,n2) -> n1 + n2 end
+```
 #### 1.3 Implementación
+```
+IO.puts(Calculadora.suma(5,4))
+IO.puts(Suma_anonima(5,5))
+```
 #### 1.4 Salida
+```
+>elixir main.ex
+9
+10
+```
 
-
-### Ejercicio 1.4. Crear una calculadora usando switch case
+### Ejercicio 1.7. Dada una lista con n numeros, se desea obtener el cuadrado de la suma de los elementos de la cola.
 ### 1.1 Descripcion del ejercicio
-  Se necesita crear una calculadora usando la sentencia switch case.
+  Si la lista es [1,2,3,4,5], el resultado es (2+3+4+5)^2 ### csc = cuadrado(suma(2,3,4,5))
 #### 1.2 Código
+```elixir
+sum = 0
+lista = [1,2,3,4,5]
+lista = tl(lista)
+IO.inspect(lista)
+[num|lista] = lista
+# Para sacar el 2
+IO.inspect(num)
+IO.inspect(lista)
+sum = sum + num
+IO.inspect(num)
+# Para sacar el 3
+[num|lista] = lista
+IO.inspect(num)
+IO.inspect(lista)
+sum = sum + num
+IO.inspect(sum)
+# Para sacar el 4
+[num|lista] = lista
+IO.inspect(num)
+IO.inspect(lista)
+sum = sum + num
+IO.inspect(sum)
+# Para sacar el 5
+[num|lista] = lista
+IO.inspect(num)
+IO.inspect(lista)
+sum = sum + num
+IO.inspect(sum)
+```
 #### 1.3 Implementación
+```elixir
+IO.puts("El resultado es: #{sum*sum}")
+```
 #### 1.4 Salida
+```
+>elixir main.ex
+[2, 3, 4, 5]
+2
+[3, 4, 5]
+2
+3
+[4, 5]
+5
+4
+[5]
+9
+5
+[]
+14
+EL resultado es: 196
+```
 
-
-### Ejercicio 1.4. Crear una calculadora usando switch case
+### Ejercicio 1.8. Escribir un programa recursivo que sume todos los elementos de una serie de números en una lista
 ### 1.1 Descripcion del ejercicio
-  Se necesita crear una calculadora usando la sentencia switch case.
+  Se necesita crear un programa que sume todos los elementos de una serie de numeros en una lista a traves de dos funciones en un modulo
 #### 1.2 Código
+```elixir
+defmodule Matematicas do
+  def sum_list([], suma), do: suma
+  def sum_list([head | tail], suma) do
+    sum_list(tail, suma + head)
+  end
+end
+```
 #### 1.3 Implementación
+```elixir
+IO.puts(Matematicas.sum_list([1,2,3,4,5,6,7,8,9,10], 0))
+IO.puts(Matematicas.sum_list([1,3,5,7,9,10,15], 0))
+```
 #### 1.4 Salida
+```
+>elixir main.exs
+55
+50
+```
